@@ -1,15 +1,14 @@
 import {ToolCallback} from "@modelcontextprotocol/sdk/server/mcp.js"
 
-import { MCPTool } from "./MCPTool.js";
+import { MCPTool, mapToolResponse } from "./MCPTool.js";
 import type {Position} from "../models/Position.js"
-import {mapPosition} from "../models/Position.js"
 import { fetchOpenPositions } from "../api/api.js"
 
 const callback: ToolCallback = async () => {
   const positions: Position[] | null = await fetchOpenPositions();
 
   if (positions !== null) {
-    const positionsContent = positions.flatMap(mapPosition);
+    const positionsContent = positions.flatMap(mapToolResponse);
   
     return {
       content: positionsContent,

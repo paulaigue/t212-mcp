@@ -1,9 +1,8 @@
 import {ToolCallback} from "@modelcontextprotocol/sdk/server/mcp.js"
 import { z } from "zod"
 
-import { MCPTool } from "./MCPTool.js";
+import { MCPTool, mapToolResponse } from "./MCPTool.js";
 import type {Position} from "../models/Position.js"
-import {mapPosition} from "../models/Position.js"
 import { fetchPosition } from "../api/api.js"
 
 type ArgsType = {ticker: z.ZodString}
@@ -16,7 +15,7 @@ const callback: ToolCallback<ArgsType> = async ({ticker}) => {
   const position: Position | null = await fetchPosition(ticker);
 
   if (position !== null) {
-    const positionsContent = mapPosition(position);
+    const positionsContent = mapToolResponse(position);
   
     return {
       content: positionsContent,

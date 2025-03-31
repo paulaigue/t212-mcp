@@ -3,6 +3,7 @@ import { z } from "zod"
 
 import { FetchOpenPositionsTool } from "./tools/FetchOpenPositionsTool.js"
 import { FetchPositionTool } from "./tools/FetchPositionTool.js";
+import { FetchAllPiesTool } from "./tools/FetchAllPiesTool.js";
 
 
 export const SERVER_NAME = "t212-mpc"
@@ -31,6 +32,12 @@ export class T212Mcp {
       FetchPositionTool.description,
       FetchPositionTool.args,
       FetchPositionTool.callBack
+    )
+    
+    this.server.tool(
+      FetchAllPiesTool.name,
+      FetchAllPiesTool.description,
+      FetchAllPiesTool.callBack
     )
   }
 

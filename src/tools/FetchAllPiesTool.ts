@@ -1,15 +1,14 @@
 import {ToolCallback} from "@modelcontextprotocol/sdk/server/mcp.js"
 
-import { MCPTool } from "./MCPTool.js";
+import { MCPTool, mapToolResponse } from "./MCPTool.js";
 import type {Pie} from "../models/Pie.js"
-import {mapPie} from "../models/Pie.js"
 import { fetchAllPies } from "../api/api.js"
 
 const callback: ToolCallback = async () => {
   const pies: Pie[] | null = await fetchAllPies();
 
   if (pies !== null) {
-    const positionsContent = pies.flatMap(mapPie);
+    const positionsContent = pies.flatMap(mapToolResponse);
   
     return {
       content: positionsContent,
