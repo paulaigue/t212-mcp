@@ -1,4 +1,5 @@
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import 'dotenv/config'
 
 import { runDebug } from "./debug.js"
 import { T212Mcp } from "./server.js"

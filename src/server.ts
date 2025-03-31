@@ -1,6 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { z } from "zod"
 
 import { FetchOpenPositionsTool } from "./tools/FetchOpenPositionsTool.js"
+import { FetchPositionTool } from "./tools/FetchPositionTool.js";
 
 
 export const SERVER_NAME = "t212-mpc"
@@ -22,6 +24,13 @@ export class T212Mcp {
       FetchOpenPositionsTool.name,
       FetchOpenPositionsTool.description,
       FetchOpenPositionsTool.callBack
+    )
+    
+    this.server.tool(
+      FetchPositionTool.name,
+      FetchPositionTool.description,
+      FetchPositionTool.args,
+      FetchPositionTool.callBack
     )
   }
 

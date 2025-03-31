@@ -1,8 +1,8 @@
 import {ToolCallback} from "@modelcontextprotocol/sdk/server/mcp.js"
 
 import { MCPTool } from "./MCPTool.js";
-import type {Position} from "../api/models.js"
-import {mapPosition} from "../api/models.js"
+import type {Position} from "../models/Position.js"
+import {mapPosition} from "../models/Position.js"
 import { fetchOpenPositions } from "../api/api.js"
 
 const callback: ToolCallback = async () => {
@@ -27,7 +27,7 @@ const callback: ToolCallback = async () => {
 
 }
 
-export const FetchOpenPositionsTool: MCPTool<undefined> = {
+export const FetchOpenPositionsTool: MCPTool = {
   name: "fetch-open-positions",
   description: "Fetch all my investents open positions",
   args: undefined,
