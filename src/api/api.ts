@@ -1,6 +1,6 @@
-
 import type {Position} from "../models/Position.js"
 import type {Pie} from "../models/Pie.js"
+import type {AccountCash, AccountMetadata} from "../models/Account.js"
 
 const API_BASE = "https://live.trading212.com/api/v0"
 const API_KEY = process.env.T212_API_KEY ?? ""
@@ -27,7 +27,7 @@ async function fetchResource<T>(resourcePath: string): Promise<T | null> {
 
     return (await response.json() as T);
   } catch (error) {
-    console.log(`Error whle fetching ${resourcePath}: ${error}`)
+    console.log(`Error while fetching ${resourcePath}: ${error}`)
     return null
   }
 }
@@ -42,4 +42,12 @@ export const fetchPosition: (ticker: string) => Promise<Position | null> = async
 
 export const fetchAllPies: () => Promise<[Pie] | null> = async () => {
   return (await fetchResource("equity/pies"))
+}
+
+export const fetchAccountCash: () => Promise<AccountCash | null> = async () => {
+  return (await fetchResource("equity/account/cash"))
+}
+
+export const fetchAccountMetadata: () => Promise<AccountMetadata | null> = async () => {
+  return (await fetchResource("equity/account/info"))
 }
