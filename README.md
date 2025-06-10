@@ -1,5 +1,7 @@
 # T212 MCP Server
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Model Context Protocol (MCP) server for interacting with Trading212's API. This server provides a standardized interface for AI models to access Trading212 account information and perform trading operations.
 
 ## What is MCP?
@@ -10,9 +12,28 @@ See documentation here: https://modelcontextprotocol.io
 
 ## Features
 
-- Portfolio position (read only for now)
-- Pies (automated investment portfolios) management (read only for now)
-- Account cash and metadata retrieval
+- 📊 Portfolio position retrieval (read-only)
+- 🥧 Pies (automated investment portfolios) management (read-only)
+- 💰 Account cash and metadata retrieval
+- 🔒 Secure API key authentication
+- 🤖 Compatible with Claude and other MCP clients
+
+## Installation
+
+### Via npm (recommended)
+
+```bash
+npm install -g t212-mcp-server
+```
+
+### From source
+
+```bash
+git clone https://github.com/paulaigue/t212-mcp.git
+cd t212-mcp
+npm install
+npm run build
+```
 
 ## Prerequisites
 
@@ -20,27 +41,26 @@ See documentation here: https://modelcontextprotocol.io
 - A Trading212 API key
 - MCP-compatible client (like Claude)
 
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/paulaigue/t212-mcp.git
-cd t212-mpc
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Build the project:
-```bash
-npm run build
-```
-
 ## Configuration
 
 To use this MCP server, you need to configure it in your MCP client settings. Here's an example configuration for Claude:
+
+### For npm installation:
+
+```json
+{
+  "mcpServers": {
+    "t212-mcp": {      
+      "command": "t212-mcp",
+      "env": {
+        "T212_API_KEY": "your-trading212-api-key"
+      }
+    }
+  }
+}
+```
+
+### For local installation:
 
 ```json
 {
@@ -58,6 +78,13 @@ To use this MCP server, you need to configure it in your MCP client settings. He
 }
 ```
 
+## Getting your Trading212 API Key
+
+1. Log into your Trading212 account
+2. Navigate to Settings → API (Practice or Live)
+3. Generate a new API key
+4. Copy the key and use it in your configuration
+
 ## Available Tools
 
 The server provides the following functionality:
@@ -70,10 +97,20 @@ The server provides the following functionality:
 
 ## Security Notes
 
-- Never commit your Trading212 API key to version control
-- Keep your MCP configuration file secure
-- Regularly rotate your API keys
+- ⚠️ Never commit your Trading212 API key to version control
+- 🔒 Keep your MCP configuration file secure
+- 🔄 Regularly rotate your API keys
+- 📝 This server currently provides read-only access to your Trading212 account
+
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+If you encounter any issues or have questions:
+
+1. Check the [issues page](https://github.com/paulaigue/t212-mcp/issues)
+2. Create a new issue if your problem isn't already reported
+3. Provide as much detail as possible, including error messages and your configuration

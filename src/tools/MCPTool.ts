@@ -1,5 +1,5 @@
 import {ToolCallback} from "@modelcontextprotocol/sdk/server/mcp.js"
-import {object, ZodRawShape } from "zod"
+import {ZodRawShape } from "zod"
 
 export interface MCPTool<T extends ZodRawShape | undefined = undefined> {
   name: string,

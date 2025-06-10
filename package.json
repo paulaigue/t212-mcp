@@ -1,14 +1,44 @@
 {
+  "name": "t212-mcp-server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server for interacting with Trading212's API",
   "type": "module",
+  "main": "./build/index.js",
   "bin": {
-    "t212-mpc": "./build/index.js"
+    "t212-mcp": "./build/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod 755 build/index.js"
+    "build": "tsc && chmod 755 build/index.js",
+    "prepublishOnly": "npm run build"
   },
   "files": [
-    "build"
+    "build/**/*",
+    "README.md",
+    "LICENSE"
   ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "trading212",
+    "api",
+    "trading",
+    "investment",
+    "claude",
+    "ai"
+  ],
+  "author": "Paul Aigueperse @paulaigue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulaigue/t212-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulaigue/t212-mcp/issues"
+  },
+  "homepage": "https://github.com/paulaigue/t212-mcp#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
     "dotenv": "^16.4.7"

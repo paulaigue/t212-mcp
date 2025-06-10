@@ -1,0 +1,24 @@
+# Source files
+src/
+tsconfig.json
+
+# Development files
+.env
+.env.*
+*.log
+.DS_Store
+.vscode/
+
+# Testing and coverage
+coverage/
+*.test.js
+*.test.ts
+
+# Build artifacts that shouldn't be included
+node_modules/
+.git/
+.gitignore
+
+# Documentation that's not needed in package
+docs/
+examples/

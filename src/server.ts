@@ -1,4 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 import { FetchOpenPositionsTool } from "./tools/FetchOpenPositionsTool.js"
 import { FetchPositionTool } from "./tools/FetchPositionTool.js";
@@ -10,7 +11,7 @@ import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
 export const SERVER_NAME = "t212-mpc"
 
 export class T212Mcp {
-  public readonly server: McpServer;
+  private server: McpServer;
 
   constructor() {
     this.server = new McpServer({
@@ -52,6 +53,13 @@ export class T212Mcp {
       FetchAccountMetadataTool.description,
       FetchAccountMetadataTool.callBack
     )
+  }
+
+  async connect() {
+    const transport = new StdioServerTransport();
+    
+    await this.server.connect(transport);
+    console.error("T212 MCP Server running on stdio");
   }
 
 }
