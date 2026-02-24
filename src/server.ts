@@ -8,7 +8,7 @@ import { FetchAccountCashTool } from "./tools/FetchAccountCashTool.js";
 import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
 
 
-export const SERVER_NAME = "t212-mpc"
+export const SERVER_NAME = "t212-mcp"
 
 export class T212Mcp {
   private server: McpServer;
@@ -17,10 +17,6 @@ export class T212Mcp {
     this.server = new McpServer({
       name: SERVER_NAME,
       version: "1.0.0",
-      capabilities: {
-        resources: {},
-        tools: {},
-      },
     });
 
     this.server.tool(

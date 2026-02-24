@@ -3,15 +3,15 @@ export interface Pie {
   dividendDetails: {
     gained: number,
     inCash: number,
-    reinvested: 0
+    reinvested: number
   },
   id: number,
-  progress: 0.5,
+  progress: number,
   result: {
     priceAvgInvestedValue: number,
     priceAvgResult: number,
     priceAvgResultCoef: number,
-    priceAvgValue: 0
+    priceAvgValue: number
   },
   status: "AHEAD" | "ON_TRACK" | "BEHIND",
 }
