@@ -6,7 +6,7 @@ import { FetchPositionTool } from "./tools/FetchPositionTool.js";
 import { FetchAllPiesTool } from "./tools/FetchAllPiesTool.js";
 import { FetchAccountCashTool } from "./tools/FetchAccountCashTool.js";
 import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
-
+import { logger } from "./logger.js";
 
 export const SERVER_NAME = "t212-mcp"
 
@@ -55,7 +55,7 @@ export class T212Mcp {
     const transport = new StdioServerTransport();
     
     await this.server.connect(transport);
-    console.error("T212 MCP Server running on stdio");
+    logger.info("T212 MCP Server running on stdio");
   }
 
 }

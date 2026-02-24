@@ -2,6 +2,7 @@
 import 'dotenv/config'
 
 import { T212Mcp } from "./server.js"
+import { logger } from "./logger.js"
 
 async function main() {
   const t212Mcp = new T212Mcp()
@@ -9,6 +10,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("Fatal error in main():", error);
+  logger.error("Fatal error in main()", { error: error instanceof Error ? error.message : String(error) })
   process.exit(1);
 });
