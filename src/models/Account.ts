@@ -1,14 +1,5 @@
-export interface AccountCash {
-  free: number;
-  blocked: number;
-  invested: number;
-  ppl: number;
-  total: number;
-}
+import { z } from "zod"
+import { AccountCashSchema, AccountMetadataSchema } from "./schemas.js"
 
-export interface AccountMetadata {
-  currency: string;
-  id: number;
-  name: string;
-  type: string;
-} 
+export type AccountCash = z.infer<typeof AccountCashSchema>
+export type AccountMetadata = z.infer<typeof AccountMetadataSchema>

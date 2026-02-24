@@ -9,6 +9,9 @@ type ArgsType = {ticker: z.ZodString}
 
 const args: ArgsType = {
   ticker: z.string()
+    .min(1, "Ticker must not be empty")
+    .max(20, "Ticker must not exceed 20 characters")
+    .regex(/^[A-Za-z0-9._-]+$/, "Ticker contains invalid characters")
 }
 
 const callback: ToolCallback<ArgsType> = async ({ticker}) => {
@@ -16,7 +19,7 @@ const callback: ToolCallback<ArgsType> = async ({ticker}) => {
 
   if (position !== null) {
     const positionsContent = mapToolResponse(position);
-  
+
     return {
       content: positionsContent,
     }
@@ -26,7 +29,7 @@ const callback: ToolCallback<ArgsType> = async ({ticker}) => {
     content: [
       {
         type: "text",
-        text: "Could not given fetch position"
+        text: "Could not fetch position"
       }
     ]
   }
