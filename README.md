@@ -38,7 +38,8 @@ Add this to your Claude Desktop configuration file:
       "command": "npx",
       "args": ["t212-mcp-server"],
       "env": {
-        "T212_API_KEY": "your-trading212-api-key"
+        "T212_API_KEY": "your-trading212-api-key-id",
+        "T212_API_SECRET": "your-trading212-api-secret"
       }
     }
   }
@@ -55,7 +56,8 @@ npm install -g t212-mcp-server
     "t212-mcp": {
       "command": "t212-mcp-server",
       "env": {
-        "T212_API_KEY": "your-trading212-api-key"
+        "T212_API_KEY": "your-trading212-api-key-id",
+        "T212_API_SECRET": "your-trading212-api-secret"
       }
     }
   }
@@ -71,12 +73,13 @@ npm install -g t212-mcp-server
 
 For detailed configuration instructions, see the [official MCP documentation](https://modelcontextprotocol.io/quickstart/user).
 
-## Getting your Trading212 API Key
+## Getting your Trading212 API Credentials
 
 1. Log into your Trading212 account
-2. Navigate to Settings → API 
+2. Navigate to Settings → API
 3. Generate a new API key
-4. Copy the key and use it in your configuration
+4. Copy both the **API Key ID** and the **Secret Key** (the secret is only shown at creation time)
+5. Use both values in your configuration as `T212_API_KEY` and `T212_API_SECRET`
 
 ## Available Tools
 
