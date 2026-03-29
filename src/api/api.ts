@@ -9,10 +9,10 @@ const API_SECRET = process.env.T212_API_SECRET ?? ""
 const USER_AGENT = "T212-mcp/1.0"
 
 async function fetchResource<T>(resourcePath: string): Promise<T | null> {
-  if (API_KEY.length == 0) {
+  if (API_KEY.length === 0) {
     throw Error("No API key found. Set T212_API_KEY environment variable.")
   }
-  if (API_SECRET.length == 0) {
+  if (API_SECRET.length === 0) {
     throw Error("No API secret found. Set T212_API_SECRET environment variable.")
   }
 
@@ -32,7 +32,7 @@ async function fetchResource<T>(resourcePath: string): Promise<T | null> {
 
     return (await response.json() as T);
   } catch (error) {
-    console.log(`Error while fetching ${resourcePath}: ${error}`)
+    console.error(`Error while fetching ${resourcePath}: ${error}`)
     return null
   }
 }
@@ -42,7 +42,7 @@ export const fetchOpenPositions: () => Promise<[Position] | null> = async () => 
 }
 
 export const fetchPosition: (ticker: string) => Promise<Position | null> = async (ticker) => {
-  return (await fetchResource(`equity/portfolio/${ticker}`))
+  return (await fetchResource(`equity/portfolio/${encodeURIComponent(ticker)}`))
 }
 
 export const fetchAllPies: () => Promise<[Pie] | null> = async () => {

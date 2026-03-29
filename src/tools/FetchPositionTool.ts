@@ -26,7 +26,7 @@ const callback: ToolCallback<ArgsType> = async ({ticker}) => {
     content: [
       {
         type: "text",
-        text: "Could not given fetch position"
+        text: "Could not fetch position"
       }
     ]
   }
