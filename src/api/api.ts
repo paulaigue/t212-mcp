@@ -4,18 +4,23 @@ import type {AccountCash, AccountMetadata} from "../models/Account.js"
 
 const API_BASE = "https://live.trading212.com/api/v0"
 const API_KEY = process.env.T212_API_KEY ?? ""
+const API_SECRET = process.env.T212_API_SECRET ?? ""
 
 const USER_AGENT = "T212-mcp/1.0"
 
 async function fetchResource<T>(resourcePath: string): Promise<T | null> {
   if (API_KEY.length == 0) {
-    throw Error("No API key found")
+    throw Error("No API key found. Set T212_API_KEY environment variable.")
+  }
+  if (API_SECRET.length == 0) {
+    throw Error("No API secret found. Set T212_API_SECRET environment variable.")
   }
 
+  const credentials = btoa(`${API_KEY}:${API_SECRET}`)
   const headers = {
     "User-Agent": USER_AGENT,
     Accept: "application/json",
-    Authorization: API_KEY
+    Authorization: `Basic ${credentials}`
   };
 
   try {
