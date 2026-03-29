@@ -6,3 +6,5 @@ dist/
 *.log
 .vscode/
 coverage/
+.pi/
+.claude/
