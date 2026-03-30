@@ -5,6 +5,8 @@ import type {Instrument} from "../models/Instrument.js"
 import type {Exchange} from "../models/Exchange.js"
 import type {HistoricalOrder, PaginatedResponse} from "../models/HistoricalOrder.js"
 import type {Dividend} from "../models/Dividend.js"
+import type {Transaction} from "../models/Transaction.js"
+import type {Export} from "../models/Export.js"
 
 const API_BASE = "https://live.trading212.com/api/v0"
 const API_KEY = process.env.T212_API_KEY ?? ""
@@ -83,4 +85,15 @@ export const fetchDividendHistory: (cursor?: string, ticker?: string, limit?: nu
   if (cursor) params.set("cursor", cursor);
   if (ticker) params.set("ticker", ticker);
   return (await fetchResource(`equity/history/dividends?${params.toString()}`))
+}
+
+export const fetchTransactionHistory: (cursor?: string, limit?: number) => Promise<PaginatedResponse<Transaction> | null> = async (cursor, limit = 20) => {
+  const params = new URLSearchParams();
+  params.set("limit", String(limit));
+  if (cursor) params.set("cursor", cursor);
+  return (await fetchResource(`equity/history/transactions?${params.toString()}`))
+}
+
+export const fetchExports: () => Promise<Export[] | null> = async () => {
+  return (await fetchResource("history/exports"))
 }

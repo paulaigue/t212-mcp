@@ -10,6 +10,8 @@ import { SearchInstrumentsTool } from "./tools/SearchInstrumentsTool.js";
 import { FetchExchangesTool } from "./tools/FetchExchangesTool.js";
 import { FetchOrderHistoryTool } from "./tools/FetchOrderHistoryTool.js";
 import { FetchDividendHistoryTool } from "./tools/FetchDividendHistoryTool.js";
+import { FetchTransactionHistoryTool } from "./tools/FetchTransactionHistoryTool.js";
+import { FetchExportsTool } from "./tools/FetchExportsTool.js";
 
 
 export const SERVER_NAME = "t212-mcp"
@@ -79,6 +81,19 @@ export class T212Mcp {
       FetchDividendHistoryTool.description,
       FetchDividendHistoryTool.args,
       FetchDividendHistoryTool.callBack
+    )
+
+    this.server.tool(
+      FetchTransactionHistoryTool.name,
+      FetchTransactionHistoryTool.description,
+      FetchTransactionHistoryTool.args,
+      FetchTransactionHistoryTool.callBack
+    )
+
+    this.server.tool(
+      FetchExportsTool.name,
+      FetchExportsTool.description,
+      FetchExportsTool.callBack
     )
   }
 
