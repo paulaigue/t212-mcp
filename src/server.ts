@@ -8,6 +8,7 @@ import { FetchAccountCashTool } from "./tools/FetchAccountCashTool.js";
 import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
 import { SearchInstrumentsTool } from "./tools/SearchInstrumentsTool.js";
 import { FetchExchangesTool } from "./tools/FetchExchangesTool.js";
+import { FetchOrderHistoryTool } from "./tools/FetchOrderHistoryTool.js";
 
 
 export const SERVER_NAME = "t212-mcp"
@@ -63,6 +64,13 @@ export class T212Mcp {
       FetchExchangesTool.name,
       FetchExchangesTool.description,
       FetchExchangesTool.callBack
+    )
+
+    this.server.tool(
+      FetchOrderHistoryTool.name,
+      FetchOrderHistoryTool.description,
+      FetchOrderHistoryTool.args,
+      FetchOrderHistoryTool.callBack
     )
   }
 

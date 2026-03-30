@@ -3,6 +3,7 @@ import type {Pie} from "../models/Pie.js"
 import type {AccountCash, AccountMetadata} from "../models/Account.js"
 import type {Instrument} from "../models/Instrument.js"
 import type {Exchange} from "../models/Exchange.js"
+import type {HistoricalOrder, PaginatedResponse} from "../models/HistoricalOrder.js"
 
 const API_BASE = "https://live.trading212.com/api/v0"
 const API_KEY = process.env.T212_API_KEY ?? ""
@@ -65,4 +66,12 @@ export const fetchInstruments: () => Promise<Instrument[] | null> = async () => 
 
 export const fetchExchanges: () => Promise<Exchange[] | null> = async () => {
   return (await fetchResource("equity/metadata/exchanges"))
+}
+
+export const fetchOrderHistory: (cursor?: string, ticker?: string, limit?: number) => Promise<PaginatedResponse<HistoricalOrder> | null> = async (cursor, ticker, limit = 20) => {
+  const params = new URLSearchParams();
+  params.set("limit", String(limit));
+  if (cursor) params.set("cursor", cursor);
+  if (ticker) params.set("ticker", ticker);
+  return (await fetchResource(`equity/history/orders?${params.toString()}`))
 }
