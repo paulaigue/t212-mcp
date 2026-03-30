@@ -1,13 +1,25 @@
+export interface PositionInstrument {
+  ticker: string,
+  name: string,
+  isin: string,
+  currency: string,
+}
+
+export interface PositionWalletImpact {
+  currency: string,
+  totalCost: number,
+  currentValue: number,
+  unrealizedProfitLoss: number,
+  fxImpact: number | null,
+}
+
 export interface Position {
-  averagePrice: number,
-  currentPrice: number,
-  frontend: "API" | "IOS" | "ANDROID" | "WEB" | "SYSTEM" | "AUTOINVEST",
-  fxPpl: number,
-  initialFillDate: string, // 2019-08-24T14:15:22Z,
-  maxBuy: number,
-  maxSell: number,
-  pieQuantity: number,
-  ppl: number,
+  instrument: PositionInstrument,
+  createdAt: string,
   quantity: number,
-  ticker: string
+  quantityAvailableForTrading: number,
+  quantityInPies: number,
+  currentPrice: number,
+  averagePricePaid: number,
+  walletImpact: PositionWalletImpact,
 }

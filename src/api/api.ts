@@ -43,12 +43,11 @@ async function fetchResource<T>(resourcePath: string): Promise<T | null> {
   }
 }
 
-export const fetchOpenPositions: () => Promise<[Position] | null> = async () => {
-  return (await fetchResource("equity/portfolio"))
-}
-
-export const fetchPosition: (ticker: string) => Promise<Position | null> = async (ticker) => {
-  return (await fetchResource(`equity/portfolio/${encodeURIComponent(ticker)}`))
+export const fetchPositions: (ticker?: string) => Promise<Position[] | null> = async (ticker) => {
+  const params = new URLSearchParams();
+  if (ticker) params.set("ticker", ticker);
+  const query = params.toString();
+  return (await fetchResource(`equity/positions${query ? `?${query}` : ""}`))
 }
 
 export const fetchAllPies: () => Promise<[Pie] | null> = async () => {
