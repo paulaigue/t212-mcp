@@ -1,6 +1,6 @@
 {
   "name": "t212-mcp-server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A Model Context Protocol (MCP) server for interacting with Trading212's API",
   "type": "module",
   "main": "./build/index.js",
