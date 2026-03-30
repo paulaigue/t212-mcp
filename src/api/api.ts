@@ -2,6 +2,7 @@ import type {Position} from "../models/Position.js"
 import type {Pie} from "../models/Pie.js"
 import type {AccountCash, AccountMetadata} from "../models/Account.js"
 import type {Instrument} from "../models/Instrument.js"
+import type {Exchange} from "../models/Exchange.js"
 
 const API_BASE = "https://live.trading212.com/api/v0"
 const API_KEY = process.env.T212_API_KEY ?? ""
@@ -60,4 +61,8 @@ export const fetchAccountMetadata: () => Promise<AccountMetadata | null> = async
 
 export const fetchInstruments: () => Promise<Instrument[] | null> = async () => {
   return (await fetchResource("equity/metadata/instruments"))
+}
+
+export const fetchExchanges: () => Promise<Exchange[] | null> = async () => {
+  return (await fetchResource("equity/metadata/exchanges"))
 }
