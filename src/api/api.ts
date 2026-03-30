@@ -8,18 +8,30 @@ import type {Dividend} from "../models/Dividend.js"
 import type {Transaction} from "../models/Transaction.js"
 import type {Export} from "../models/Export.js"
 
-const API_BASE = "https://live.trading212.com/api/v0"
+const ENVIRONMENT = process.env.T212_ENVIRONMENT === "demo" ? "demo" : "live"
+const API_BASE = `https://${ENVIRONMENT}.trading212.com/api/v0`
 const API_KEY = process.env.T212_API_KEY ?? ""
 const API_SECRET = process.env.T212_API_SECRET ?? ""
 
 const USER_AGENT = "T212-mcp/1.0"
+const REQUEST_TIMEOUT_MS = 30_000
+
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public readonly statusCode?: number,
+  ) {
+    super(message)
+    this.name = "ApiError"
+  }
+}
 
 async function fetchResource<T>(resourcePath: string): Promise<T | null> {
   if (API_KEY.length === 0) {
-    throw Error("No API key found. Set T212_API_KEY environment variable.")
+    throw new ApiError("No API key found. Set T212_API_KEY environment variable.")
   }
   if (API_SECRET.length === 0) {
-    throw Error("No API secret found. Set T212_API_SECRET environment variable.")
+    throw new ApiError("No API secret found. Set T212_API_SECRET environment variable.")
   }
 
   const credentials = btoa(`${API_KEY}:${API_SECRET}`)
@@ -29,17 +41,37 @@ async function fetchResource<T>(resourcePath: string): Promise<T | null> {
     Authorization: `Basic ${credentials}`
   };
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
   try {
-    const response = await fetch(`${API_BASE}/${resourcePath}`, {headers})
+    const response = await fetch(`${API_BASE}/${resourcePath}`, {
+      headers,
+      signal: controller.signal,
+    })
+
+    if (response.status === 429) {
+      const retryAfter = response.headers.get("x-ratelimit-reset");
+      const resetInfo = retryAfter ? ` Resets at ${new Date(Number(retryAfter) * 1000).toISOString()}.` : "";
+      throw new ApiError(`Rate limited by Trading 212 API. Please wait and try again.${resetInfo}`, 429);
+    }
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new ApiError(`HTTP error! status: ${response.status}`, response.status);
     }
 
     return (await response.json() as T);
   } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new ApiError(`Request timed out after ${REQUEST_TIMEOUT_MS / 1000}s`, 408);
+    }
     console.error(`Error while fetching ${resourcePath}: ${error}`)
     return null
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 

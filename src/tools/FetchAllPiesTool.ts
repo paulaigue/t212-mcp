@@ -28,7 +28,7 @@ const callback: ToolCallback = async () => {
 
 export const FetchAllPiesTool: MCPTool = {
   name: "fetch-all-pies",
-  description: "Fetch all my pies. A pie is a collection of securities - stocks & ETFs. Each security is represented as a slice of the pie. Each pie can hold up to 50 securities. You can have multiple pies.",
+  description: "[DEPRECATED] Fetch all pies. A pie is a collection of securities - stocks & ETFs. This endpoint is deprecated by Trading 212 and may be removed in the future.",
   args: undefined,
   callBack: callback
 }
