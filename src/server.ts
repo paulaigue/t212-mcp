@@ -6,6 +6,7 @@ import { FetchPositionTool } from "./tools/FetchPositionTool.js";
 import { FetchAllPiesTool } from "./tools/FetchAllPiesTool.js";
 import { FetchAccountCashTool } from "./tools/FetchAccountCashTool.js";
 import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
+import { SearchInstrumentsTool } from "./tools/SearchInstrumentsTool.js";
 
 
 export const SERVER_NAME = "t212-mcp"
@@ -48,6 +49,13 @@ export class T212Mcp {
       FetchAccountMetadataTool.name,
       FetchAccountMetadataTool.description,
       FetchAccountMetadataTool.callBack
+    )
+
+    this.server.tool(
+      SearchInstrumentsTool.name,
+      SearchInstrumentsTool.description,
+      SearchInstrumentsTool.args,
+      SearchInstrumentsTool.callBack
     )
   }
 
