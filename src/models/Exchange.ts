@@ -1,6 +1,6 @@
 export interface TimeEvent {
   date: string,
-  type: "OPEN" | "CLOSE",
+  type: string,
 }
 
 export interface WorkingSchedule {

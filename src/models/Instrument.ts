@@ -1,6 +1,6 @@
 export interface Instrument {
   ticker: string,
-  type: "STOCK" | "ETF" | "WARRANT",
+  type: string,
   workingScheduleId: number,
   isin: string,
   currencyCode: string,

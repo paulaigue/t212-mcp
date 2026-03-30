@@ -95,5 +95,5 @@ export const fetchTransactionHistory: (cursor?: string, limit?: number) => Promi
 }
 
 export const fetchExports: () => Promise<Export[] | null> = async () => {
-  return (await fetchResource("history/exports"))
+  return (await fetchResource("equity/history/exports"))
 }

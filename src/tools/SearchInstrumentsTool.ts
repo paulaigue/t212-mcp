@@ -5,16 +5,14 @@ import { MCPTool, mapToolResponse } from "./MCPTool.js";
 import type { Instrument } from "../models/Instrument.js"
 import { fetchInstruments } from "../api/api.js"
 
-const instrumentTypeEnum = z.enum(["STOCK", "ETF", "WARRANT"])
-
 type ArgsType = {
   query: z.ZodString,
-  type: z.ZodOptional<typeof instrumentTypeEnum>
+  type: z.ZodOptional<z.ZodString>,
 }
 
 const args: ArgsType = {
   query: z.string().describe("Search term to filter instruments by ticker or name (case-insensitive)"),
-  type: instrumentTypeEnum.optional().describe("Filter by instrument type"),
+  type: z.string().optional().describe("Filter by instrument type (e.g. STOCK, ETF, WARRANT, CRYPTO, INDEX, FOREX, FUTURES, CVR, CORPACT)"),
 }
 
 const MAX_RESULTS = 50
