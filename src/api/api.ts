@@ -1,6 +1,6 @@
 import type {Position} from "../models/Position.js"
 import type {Pie} from "../models/Pie.js"
-import type {AccountCash, AccountMetadata} from "../models/Account.js"
+import type {AccountSummary} from "../models/Account.js"
 import type {Instrument} from "../models/Instrument.js"
 import type {Exchange} from "../models/Exchange.js"
 import type {HistoricalOrder, PaginatedResponse} from "../models/HistoricalOrder.js"
@@ -55,12 +55,8 @@ export const fetchAllPies: () => Promise<[Pie] | null> = async () => {
   return (await fetchResource("equity/pies"))
 }
 
-export const fetchAccountCash: () => Promise<AccountCash | null> = async () => {
-  return (await fetchResource("equity/account/cash"))
-}
-
-export const fetchAccountMetadata: () => Promise<AccountMetadata | null> = async () => {
-  return (await fetchResource("equity/account/info"))
+export const fetchAccountSummary: () => Promise<AccountSummary | null> = async () => {
+  return (await fetchResource("equity/account/summary"))
 }
 
 export const fetchInstruments: () => Promise<Instrument[] | null> = async () => {

@@ -1,14 +1,20 @@
 export interface AccountCash {
-  free: number;
-  blocked: number;
-  invested: number;
-  ppl: number;
-  total: number;
+  availableToTrade: number,
+  reservedForOrders: number,
+  inPies: number,
 }
 
-export interface AccountMetadata {
-  currency: string;
-  id: number;
-  name: string;
-  type: string;
-} 
+export interface AccountInvestments {
+  currentValue: number,
+  totalCost: number,
+  realizedProfitLoss: number,
+  unrealizedProfitLoss: number,
+}
+
+export interface AccountSummary {
+  id: number,
+  currency: string,
+  totalValue: number,
+  cash: AccountCash,
+  investments: AccountInvestments,
+}

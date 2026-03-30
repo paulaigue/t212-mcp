@@ -4,8 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { FetchOpenPositionsTool } from "./tools/FetchOpenPositionsTool.js"
 import { FetchPositionTool } from "./tools/FetchPositionTool.js";
 import { FetchAllPiesTool } from "./tools/FetchAllPiesTool.js";
-import { FetchAccountCashTool } from "./tools/FetchAccountCashTool.js";
-import { FetchAccountMetadataTool } from "./tools/FetchAccountMetadataTool.js";
+import { FetchAccountSummaryTool } from "./tools/FetchAccountSummaryTool.js";
 import { SearchInstrumentsTool } from "./tools/SearchInstrumentsTool.js";
 import { FetchExchangesTool } from "./tools/FetchExchangesTool.js";
 import { FetchOrderHistoryTool } from "./tools/FetchOrderHistoryTool.js";
@@ -45,15 +44,9 @@ export class T212Mcp {
     )
 
     this.server.tool(
-      FetchAccountCashTool.name,
-      FetchAccountCashTool.description,
-      FetchAccountCashTool.callBack
-    )
-
-    this.server.tool(
-      FetchAccountMetadataTool.name,
-      FetchAccountMetadataTool.description,
-      FetchAccountMetadataTool.callBack
+      FetchAccountSummaryTool.name,
+      FetchAccountSummaryTool.description,
+      FetchAccountSummaryTool.callBack
     )
 
     this.server.tool(
